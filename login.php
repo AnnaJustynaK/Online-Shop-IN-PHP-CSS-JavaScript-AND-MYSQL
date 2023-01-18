@@ -1,83 +1,58 @@
-<?php
-
-session_start();
-
-
-
-$con = mysqli_connect("localhost","root","","c_online");
-
-?>
-    <!DOCTYPE HTML>
-    <html>
-
-    <head>
-
-        <title>Admin Login</title>
-
-        <link rel="stylesheet" href="../styles/bootstrap.min.css" >
-
-        <link rel="stylesheet" href="../styles/login.css" >
-
-    </head>
-
-    <body>
-
-    <div class="container" ><!-- container Starts -->
-
-        <form class="form-login" action="" method="post" ><!-- form-login Starts -->
-
-            <h2 class="form-login-heading" >Admin Login</h2>
-
-            <input type="text" class="form-control" name="admin_email" placeholder="Email Address" required >
-
-            <input type="password" class="form-control" name="admin_pass" placeholder="Password" required >
-
-            <button class="btn btn-lg btn-primary btn-block" type="submit" name="admin_login" >
-
-                Log in
-
-            </button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100" >
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
 
 
-        </form><!-- form-login Ends -->
+<!--HEADLINE    -->
+<?php include "includes/header.php" ?>
+<?php include "controllers/login.controller.php" ?>
 
-    </div><!-- container Ends -->
+<!--SIDE BAR FOR CATEGORIES-->
+<div id="content">
+    <div class="container">
+            <?php include "includes/sidebar.php" ?>
+		
+        <div class="col-md-9">
+<!--        WELCOME STRIP-->
+			<div class="row">
+				<div class="box">
+					<h1>Customer Login</h1>
+					<p>
+                    <a href="customer_register.php" class="btn btn-success btn-sm">Click here to REGISTER.</a>
+					</p>
+				</div>
+			</div>
 
+            <!-- ITEMS-->
 
+            <div class="row">
+			<div class="box">
+             <form style="border:1px solid #ccc" method='POST' > <!--add POST Action -->
+			  <div class="container">
+				
+				<br>
+				<label for="email"><b>Email</b></label><br>
+				<input type="email" placeholder="Enter Email" name="email" required><br>
 
-    </body>
-
-    </html>
-
-<?php
-
-if(isset($_POST['admin_login'])){
-
-    $admin_email = mysqli_real_escape_string($con,$_POST['admin_email']);
-
-    $admin_pass = mysqli_real_escape_string($con,$_POST['admin_pass']);
-
-    $get_admin = "select * from admins where admin_email='$admin_email' AND admin_pass='$admin_pass'";
-
-    $run_admin = mysqli_query($con,$get_admin);
-
-    $count = mysqli_num_rows($run_admin);
-
-    if($count==1){
-
-        $_SESSION['admin_email']=$admin_email;
-
-        echo "<script>alert('You are Logged in into admin panel')</script>";
-
-        echo "<script>window.open('index.php?dashboard','_self')</script>";
-
-    }
-    else {
-
-        echo "<script>alert('Email or Password is Wrong')</script>";
-
-    }
-
-}
-
-?>
+				<label for="password"><b>Password</b></label><br>
+				<input type="password" placeholder="Enter Password" name="password" required><br>
+				
+				<div class="clearfix">
+				  <button type="submit" class="signupbtn">Login</button>
+				</div>
+			  </div>
+			</form>  
+			</div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
